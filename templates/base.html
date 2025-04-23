@@ -1,0 +1,55 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Ứng Dụng Mã Hóa Dữ Liệu{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Ứng Dụng Mã Hóa Dữ Liệu</h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Trang Chủ</a></li>
+                    <li><a href="#gioi-thieu">Giới Thiệu</a></li>
+                    {% if session.user_id %}
+                        <li><a href="{{ url_for('upload_file') }}">Tải Dữ Liệu Lên</a></li>
+                        <li><a href="{{ url_for('dashboard') }}">Bảng Điều Khiển</a></li>
+                        <li><a href="{{ url_for('logout') }}">Đăng Xuất</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('login') }}">Đăng Nhập</a></li>
+                        <li><a href="{{ url_for('register') }}">Đăng Ký</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Flash messages -->
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Ứng Dụng Mã Hóa Dữ Liệu. Tất cả các quyền được bảo lưu.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <h2>Chào mừng bạn đến với Ứng Dụng Mã Hóa Dữ Liệu!</h2>
+    <p>Với dịch vụ của chúng tôi, bạn có thể tải lên và mã hóa dữ liệu của mình trước khi lưu trữ trên cloud.</p>
+</section>
+
+<section id="gioi-thieu" class="intro-section">
+    <h3>Giới Thiệu</h3>
+    <p>Ứng dụng mã hóa dữ liệu của chúng tôi giúp bạn bảo vệ thông tin cá nhân và tài liệu quan trọng. Mọi dữ liệu được mã hóa bằng thuật toán mạnh mẽ trước khi lưu trữ, đảm bảo chỉ có bạn mới có thể truy cập.</p>
+    
+    <div class="features">
+        <div class="feature">
+            <h4>Mã hóa an toàn</h4>
+            <p>Sử dụng các thuật toán mã hóa hiện đại để bảo vệ dữ liệu của bạn.</p>
+        </div>
+        <div class="feature">
+            <h4>Dễ dàng sử dụng</h4>
+            <p>Giao diện thân thiện, dễ dàng tải lên và tải xuống dữ liệu.</p>
+        </div>
+        <div class="feature">
+            <h4>Bảo mật cao</h4>
+            <p>Thông tin của bạn được bảo vệ bằng các phương pháp xác thực mạnh mẽ.</p>
+        </div>
+    </div>
+</section>
+
+{% if not session.user_id %}
+<section class="cta-section">
+    <h3>Bắt đầu ngay hôm nay</h3>
+    <p>Đăng ký tài khoản để sử dụng dịch vụ mã hóa dữ liệu của chúng tôi.</p>
+    <div class="cta-buttons">
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Đăng Ký</a>
+        <a href="{{ url_for('login') }}" class="btn btn-secondary">Đăng Nhập</a>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
+

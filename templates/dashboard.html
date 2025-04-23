@@ -1,0 +1,45 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}Bảng Điều Khiển - Ứng Dụng Mã Hóa Dữ Liệu{% endblock %}
+
+{% block content %}
+<section class="dashboard">
+    <h3>Bảng Điều Khiển</h3>
+    <p>Xin chào, {{ user.name }}!</p>
+    
+    <div class="dashboard-actions">
+        <a href="{{ url_for('upload_file') }}" class="btn btn-primary">Tải Lên File Mới</a>
+    </div>
+    
+    <div class="files-section">
+        <h4>Files của bạn</h4>
+        {% if files %}
+            <table class="files-table">
+                <thead>
+                    <tr>
+                        <th>Tên File</th>
+                        <th>Ngày Tải Lên</th>
+                        <th>Trạng Thái</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file in files %}
+                    <tr>
+                        <td>{{ file.original_filename }}</td>
+                        <td>{{ file.upload_date_vn.strftime('%d/%m/%Y %H:%M') }}</td>
+                        <td>{% if file.encrypted %}Đã mã hóa{% else %}Chưa mã hóa{% endif %}</td>
+                        <td>
+                            <a href="{{ url_for('download_file', file_id=file.id) }}" class="btn btn-sm btn-secondary">Tải Xuống</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Bạn chưa có file nào. Hãy tải lên file đầu tiên!</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

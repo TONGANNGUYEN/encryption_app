@@ -1,0 +1,16 @@
+<!-- templates/upload.html -->
+{% extends "base.html" %}
+
+{% block title %}Tải Lên Dữ Liệu - Ứng Dụng Mã Hóa Dữ Liệu{% endblock %}
+
+{% block content %}
+<section class="upload-section">
+    <h3>Tải Lên Dữ Liệu</h3>
+    <form id="upload-form" method="POST" action="{{ url_for('upload_file') }}" enctype="multipart/form-data">
+        <label for="file-upload">Chọn tệp để tải lên:</label>
+        <input type="file" id="file-upload" name="file" required>
+        <p class="form-note">Các định dạng được hỗ trợ: .txt, .pdf, .png, .jpg, .jpeg, .doc, .docx, .xls, .xlsx</p>
+        <button type="submit" class="btn btn-primary">Tải Lên & Mã Hóa</button>
+    </form>
+</section>
+{% endblock %}
